@@ -1,0 +1,32 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2024 Aakurru Water Team
+- Hongtao Xu (14697890)
+- Trung Hieu Pham (25111701)
+- Liukuan Li (14740512)
+
+University of Technology Sydney
+31265 Communication for IT Professionals — Assessment Task 3
+
+This work is licensed under the Creative Commons Attribution 4.0 International License.
+To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/
+
+You are free to:
+
+  Share — copy and redistribute the material in any medium or format
+  Adapt — remix, transform, and build upon the material for any purpose, even commercially.
+
+Under the following terms:
+
+  Attribution — You must give appropriate credit, provide a link to the license,
+  and indicate if changes were made. You may do so in any reasonable manner, but
+  not in any way that suggests the licensor endorses you or your use.
+
+  No additional restrictions — You may not apply legal terms or technological
+  measures that legally restrict others from doing anything the license permits.
+
+This design proposal was prepared in respectful response to the priorities of
+the Yintjingga Aboriginal Corporation (YAC) and the Lama Lama Land Trust. Any
+adaptation or scaling for other Indigenous communities should be undertaken in
+consultation with the relevant Traditional Owners and their representative
+organisations.

@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aakurru Water — Clean Drinking Water for Lama Lama Country</title>
+
+<!-- Editorial font pairing: Fraunces (display serif) + Inter Tight (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== Design tokens — palette inspired by Cape York: red earth, ocean, rainforest ===== */
+  :root {
+    --earth: #B0552A;       /* Cape York red earth */
+    --earth-dark: #7D3514;
+    --earth-light: #E8C9B5;
+    --ocean: #1E5C8C;       /* Princess Charlotte Bay */
+    --ocean-dark: #0F3554;
+    --ocean-light: #B8D4E3;
+    --forest: #3E6B3A;      /* McIlwraith rainforest */
+    --sand: #F5EDE0;        /* Beach sand */
+    --bone: #FAF6F0;        /* Page background */
+    --ink: #1A1A1A;
+    --ink-soft: #4A4A4A;
+    --ink-fade: #888;
+    --line: rgba(26, 26, 26, 0.12);
+    --highlight: #E8B931;   /* Warning ochre */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', -apple-system, sans-serif;
+    background: var(--bone);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 17px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(176, 85, 42, 0.03), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(30, 92, 140, 0.03), transparent 50%);
+  }
+
+  /* ===== Sticky Acknowledgement Banner ===== */
+  .ack-banner {
+    background: var(--ocean-dark);
+    color: var(--sand);
+    padding: 10px 24px;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    border-bottom: 1px solid var(--ocean);
+  }
+  .ack-banner strong { color: var(--earth-light); font-weight: 500; }
+
+  /* ===== Navigation ===== */
+  nav.top {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 246, 240, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+  }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .brand-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    font-variation-settings: 'opsz' 144;
+    letter-spacing: -0.02em;
+  }
+  .brand-tag {
+    font-size: 11px;
+    color: var(--ink-fade);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { background: var(--sand); color: var(--earth-dark); }
+  .nav-links a.active { background: var(--earth); color: white; }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 100px 32px 120px;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--earth);
+    font-weight: 600;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--earth);
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: 'opsz' 144;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 600;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 36px;
+    max-width: 1000px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--earth);
+    font-weight: 500;
+  }
+  .hero-sub {
+    font-size: 20px;
+    color: var(--ink-soft);
+    max-width: 720px;
+    line-height: 1.5;
+    margin-bottom: 56px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+    max-width: 900px;
+  }
+  .meta-item .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-fade);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .meta-item .value {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ===== Section base ===== */
+  section.page {
+    padding: 120px 32px;
+    border-top: 1px solid var(--line);
+  }
+  .page-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .page-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--earth);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .page-title {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: 'opsz' 144;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+    max-width: 900px;
+  }
+  .page-title em { font-style: italic; color: var(--earth); font-weight: 500; }
+
+  h2.sub {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: 'opsz' 144;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 48px 0 20px;
+    letter-spacing: -0.01em;
+    color: var(--ocean-dark);
+  }
+  h3.subsub {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--earth);
+    margin: 28px 0 12px;
+  }
+
+  p { margin-bottom: 18px; color: var(--ink); }
+  p.lead { font-size: 22px; line-height: 1.5; color: var(--ink-soft); font-weight: 300; margin-bottom: 32px; max-width: 760px; }
+
+  ul.bullets { list-style: none; padding-left: 0; margin-bottom: 24px; }
+  ul.bullets li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  ul.bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 16px;
+    height: 1px;
+    background: var(--earth);
+  }
+  ul.bullets li strong { color: var(--ocean-dark); }
+
+  /* Pull-quote / callout */
+  .callout {
+    background: var(--sand);
+    border-left: 4px solid var(--earth);
+    padding: 28px 32px;
+    margin: 32px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--earth);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  /* Metric cards (executive summary) */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .metric {
+    background: white;
+    border: 1px solid var(--line);
+    padding: 28px 24px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 36px;
+    height: 4px;
+    background: var(--earth);
+  }
+  .metric .num {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: 'opsz' 144;
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--ocean-dark);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .metric .lbl {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 15px;
+  }
+  thead { background: var(--ocean-dark); color: white; }
+  th, td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { font-weight: 600; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; }
+  tbody tr:nth-child(even) { background: var(--sand); }
+  tbody tr:last-child td { border-bottom: none; }
+  tr.total td {
+    background: var(--ocean-dark) !important;
+    color: white;
+    font-weight: 600;
+  }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+  td.winner { background: rgba(62, 107, 58, 0.1) !important; color: var(--forest); font-weight: 600; }
+  caption { caption-side: bottom; padding: 12px 0; font-size: 13px; color: var(--ink-fade); font-style: italic; }
+
+  /* Two-column: problem/solution */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin: 40px 0;
+  }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; gap: 24px; } }
+  .col h3 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; margin-bottom: 16px; color: var(--ocean-dark); }
+
+  /* Design option cards */
+  .opt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .opt-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 32px 28px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .opt-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+  .opt-card.selected { border: 2px solid var(--forest); background: linear-gradient(180deg, white 0%, rgba(62, 107, 58, 0.05) 100%); }
+  .opt-card.selected::after {
+    content: '★ Selected';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--forest);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .opt-num {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 600;
+    color: var(--earth-light);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .opt-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--ocean-dark);
+    line-height: 1.2;
+  }
+  .opt-pros, .opt-cons { font-size: 14px; margin-top: 14px; line-height: 1.55; }
+  .opt-pros strong { color: var(--forest); }
+  .opt-cons strong { color: var(--earth-dark); }
+
+  /* Step list (implementation) */
+  .steps {
+    counter-reset: step-counter;
+    list-style: none;
+    padding-left: 0;
+    margin: 32px 0;
+  }
+  .steps li {
+    counter-increment: step-counter;
+    position: relative;
+    padding-left: 72px;
+    padding-bottom: 32px;
+    border-left: 1px dashed var(--line);
+    margin-left: 24px;
+  }
+  .steps li:last-child { padding-bottom: 0; border-left: none; }
+  .steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: -24px;
+    top: -4px;
+    width: 48px;
+    height: 48px;
+    background: var(--earth);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .steps li h4 { font-size: 18px; font-weight: 600; margin-bottom: 6px; color: var(--ocean-dark); }
+  .steps li p { font-size: 15px; color: var(--ink-soft); margin-bottom: 0; }
+
+  /* Criteria mini-cards */
+  .crit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .crit {
+    background: white;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--earth);
+    padding: 20px;
+    border-radius: 0 6px 6px 0;
+  }
+  .crit h4 { font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 8px; color: var(--ocean-dark); }
+  .crit p { font-size: 14px; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+
+  /* SVG diagram container */
+  .diagram-wrap {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 32px;
+    margin: 32px 0;
+    text-align: center;
+  }
+  .diagram-wrap svg { max-width: 100%; height: auto; }
+  .diagram-wrap .cap {
+    font-size: 13px;
+    color: var(--ink-fade);
+    font-style: italic;
+    margin-top: 16px;
+  }
+
+  /* Reference list */
+  .references {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .references p {
+    padding-left: 28px;
+    text-indent: -28px;
+    margin-bottom: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* Footer */
+  footer {
+    background: var(--ocean-dark);
+    color: var(--ocean-light);
+    padding: 80px 32px 40px;
+    margin-top: 80px;
+  }
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+  footer h4 {
+    color: white;
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  footer p, footer li { font-size: 14px; line-height: 1.6; }
+  footer ul { list-style: none; padding: 0; }
+  footer ul li { margin-bottom: 8px; }
+  footer ul li a { color: var(--ocean-light); text-decoration: none; transition: color 0.2s; }
+  footer ul li a:hover { color: white; }
+  .copyright { font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero > * { animation: fadeUp 0.8s ease-out both; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero-title { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.3s; }
+  .hero-meta { animation-delay: 0.4s; }
+
+  /* Special "Yintjingga" name styling */
+  .culture-name {
+    font-style: italic;
+    color: var(--earth-dark);
+    font-weight: 500;
+  }
+
+  /* Mobile nav */
+  @media (max-width: 900px) {
+    .nav-inner { flex-direction: column; align-items: flex-start; }
+    .nav-links { width: 100%; overflow-x: auto; padding-bottom: 4px; }
+    .hero { padding: 60px 24px 80px; }
+    section.page { padding: 80px 24px; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Acknowledgement banner -->
+<div class="ack-banner">
+  We acknowledge the <strong>Lama Lama people</strong> as Traditional Owners of the lands and waters of Port Stewart, and pay our respects to Elders past, present, and emerging.
+</div>
+
+<!-- Navigation -->
+<nav class="top">
+  <div class="nav-inner">
+    <a href="#home" class="brand">
+      <span class="brand-mark">Aakurru Water</span>
+      <span class="brand-tag">EWB Challenge 2024 · Port Stewart</span>
+    </a>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#background">Background</a>
+      <a href="#problem">Problem</a>
+      <a href="#options">Options</a>
+      <a href="#selection">Selection</a>
+      <a href="#design">Design</a>
+      <a href="#prototype">Prototype</a>
+      <a href="#implementation">Implementation</a>
+      <a href="#cost">Cost</a>
+      <a href="#about">Team</a>
+    </div>
+  </div>
+</nav>
+
+<!-- =================== HOME / EXECUTIVE SUMMARY =================== -->
+<section class="hero" id="home">
+  <div class="hero-eyebrow">EWB Challenge 2024 · Design Area 6 · Water Resilience</div>
+
+  <h1 class="hero-title">Clean, solar-powered drinking water for <em>Lama Lama</em> Country.</h1>
+
+  <p class="hero-sub">A simple, off-grid rainwater harvesting and filtration system designed in partnership with the Yintjingga Aboriginal Corporation for the Lama Lama community at Port Stewart, Far North Queensland.</p>
+
+  <div class="hero-meta">
+    <div class="meta-item">
+      <div class="label">Project Opportunity</div>
+      <div class="value">Safe drinking water for Port Stewart</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">System Cost</div>
+      <div class="value">AUD $3,750 per module</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Serves</div>
+      <div class="value">25–30 people per module</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Power Source</div>
+      <div class="value">100% solar, off-grid</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PROPOSAL SUMMARY (LANDING CONTINUATION) =================== -->
+<section class="page" style="padding-top: 80px;">
+  <div class="page-inner">
+    <div class="page-eyebrow">Proposal Summary</div>
+    <h2 class="page-title">A modular, community-led answer to a decades-old problem.</h2>
+
+    <p class="lead">The project addresses the long-standing lack of safe drinking water at Port Stewart through a low-cost, low-maintenance system that combines wet-season rainwater harvesting, three-stage filtration, a solar-powered pump, and sealed storage. The design has been developed in respectful response to the priorities of the Yintjingga Aboriginal Corporation (YAC) and the Lama Lama Land Trust.</p>
+
+    <div class="metric-grid">
+      <div class="metric">
+        <div class="num">50→100</div>
+        <div class="lbl">Population at Port Stewart, ranging from wet to dry season</div>
+      </div>
+      <div class="metric">
+        <div class="num">0</div>
+        <div class="lbl">Local emissions, diesel deliveries, or chemical inputs</div>
+      </div>
+      <div class="metric">
+        <div class="num">$150</div>
+        <div class="lbl">Annual operating cost in AUD, mostly filter cartridges</div>
+      </div>
+      <div class="metric">
+        <div class="num">8 hrs</div>
+        <div class="lbl">Drive to nearest regional centre, impassable in wet season</div>
+      </div>
+    </div>
+
+    <h2 class="sub">Key Considerations at a Glance</h2>
+    <ul class="bullets">
+      <li><strong>Materials</strong> sourced from Cairns-based suppliers, with all consumables (filter cartridges) available by mail order or in Coen.</li>
+      <li><strong>Maintenance</strong> is light: cartridge replacement every 6–12 months, annual tank cleaning, and visual checks of the solar panel.</li>
+      <li><strong>Implementation</strong> is community-led, with Lama Lama Rangers trained as system custodians during a 2–3-day on-Country build.</li>
+      <li><strong>Further consultation</strong> with YAC is recommended to confirm tank placement, cultural protocols around water handling, and seasonal demand patterns.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =================== BACKGROUND =================== -->
+<section class="page" id="background">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 1 · Background</div>
+    <h2 class="page-title"><em>Aakurru.</em> Home. The lower Stewart River.</h2>
+
+    <h2 class="sub">Context: Lama Lama Country and Port Stewart</h2>
+    <p>The Lama Lama people are the Traditional Owners of lands extending several hundred kilometres along Princess Charlotte Bay in eastern Cape York Peninsula, Queensland, beginning north at Massey River and ending at the Normanby River (Lama Lama Aboriginal Corporation, n.d.). They identify as <span class="culture-name">"sand beach people"</span> and <span class="culture-name">"saltwater people"</span> — terms that reflect a deep cultural connection to coastal landscapes and marine resources.</p>
+
+    <p>In 1961, Lama Lama people were forcibly removed from <span class="culture-name">Yintjingga</span> (Port Stewart) by Queensland authorities and dispersed to distant settlements. From the 1970s onwards, families gradually returned to Country, and by 2011 the community had regained ownership of most of its traditional lands (Lama Lama Aboriginal Corporation, n.d.).</p>
+
+    <p>Today, the Yintjingga Aboriginal Corporation (YAC), established in 2009 by Lama Lama Traditional Owners in Coen and Port Stewart, coordinates social, cultural, environmental, and economic programs on Country (Office of the Registrar of Indigenous Corporations, 2016). YAC manages the well-regarded Lama Lama Rangers program and acts as the principal point of partnership for external organisations working with the community, including Engineers Without Borders Australia (EWB).</p>
+
+    <h2 class="sub">Significance of the Drinking Water Problem</h2>
+    <p>For decades, lack of safe drinking water has limited the Lama Lama community's ability to live continuously on Country, particularly during the dry season, when the resident population of approximately 50 people can swell to nearly 100 with returning family members and visitors (Yaru Water, 2024).</p>
+
+    <div class="callout">
+      <div class="label">From the field</div>
+      <p>Surface water sourced from the nearby Stewart River has been tested by EWB and found to contain heavy metals at concentrations that make it unsafe to drink. The nearest regional centre, Coen, is an eight-hour drive away over four-wheel-drive tracks that are impassable during the wet season; purchasing bottled water from Coen is described by EWB as "prohibitively expensive and time consuming" (Engineers Without Borders Australia, 2025).</p>
+    </div>
+
+    <p>Studies of drinking water in remote Northern Australian communities have shown high microbial diversity in source-to-distribution systems and the presence of opportunistic pathogens, underscoring the need for both treatment and storage solutions appropriate to remote, off-grid settings (Kaestli et al., 2019).</p>
+
+    <h2 class="sub">Existing Efforts and Their Limits</h2>
+    <p>EWB Australia has worked alongside YAC on water access at Port Stewart for over a decade. In 2024, the Yaru Foundation pledged AUD $40,000 toward a rainwater harvesting, filtration, and solar-pump system co-designed with Arup and the Centre for Appropriate Technology (Yaru Water, 2024). This system represents the current state-of-the-art on-Country solution.</p>
+
+    <p>However, it is funded through philanthropic donations, is centralised on one rooftop, and does not include a documented, replicable design that could be extended to additional clan estates or scaled to other Indigenous communities with similar conditions. Our project addresses this gap with a documented, modular, cost-transparent design that the community and other Aboriginal Corporations could replicate, scale, and own.</p>
+  </div>
+</section>
+
+<!-- =================== PROBLEM DESCRIPTION =================== -->
+<section class="page" id="problem">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 2 · Problem Description</div>
+    <h2 class="page-title">Defining the problem — and the criteria for a good answer.</h2>
+
+    <h2 class="sub">User Needs Statement</h2>
+    <div class="callout">
+      <div class="label">How might we statement</div>
+      <p>The Lama Lama community at Port Stewart needs a <strong>reliable, affordable, and culturally appropriate</strong> supply of safe drinking water that functions through both wet and dry seasons, operates without grid electricity, and can be maintained on-Country by the community.</p>
+    </div>
+
+    <h2 class="sub">Problem and Ideal Outcome</h2>
+    <div class="two-col">
+      <div class="col">
+        <h3>Current Situation</h3>
+        <p>Lama Lama Rangers and resident families at Port Stewart currently rely on a combination of surface water (which contains unsafe levels of heavy metals), seasonal rainwater (collected informally and not stored at scale), and occasional purchases of bottled water from Coen — which is expensive and impractical in the wet season.</p>
+      </div>
+      <div class="col">
+        <h3>Ideal Outcome</h3>
+        <p>A permanent, on-Country drinking-water system that delivers a consistent volume of treated water at the tap, requires only seasonal cartridge changes, and is fully controlled by the community.</p>
+      </div>
+    </div>
+
+    <h2 class="sub">Design Criteria</h2>
+    <p>The following five criteria were developed in response to community priorities documented by EWB and YAC, and are used in the decision matrix in the next section.</p>
+
+    <div class="crit-grid">
+      <div class="crit">
+        <h4>Drinking-Water Safety</h4>
+        <p>Meets the Australian Drinking Water Guidelines for microbial and chemical parameters. Highest priority — protects children and Elders.</p>
+      </div>
+      <div class="crit">
+        <h4>Off-grid Operability</h4>
+        <p>Functions without mains electricity, and remains operable through cloudy days of the wet season.</p>
+      </div>
+      <div class="crit">
+        <h4>Affordability</h4>
+        <p>Capital and operating costs low enough that the community can fund maintenance from existing income streams.</p>
+      </div>
+      <div class="crit">
+        <h4>Maintainability on Country</h4>
+        <p>Parts available through Cairns/Coen suppliers; repairs achievable by Lama Lama Rangers with introductory training.</p>
+      </div>
+      <div class="crit">
+        <h4>Cultural & Environmental Fit</h4>
+        <p>Zero emissions, no chemical dosing, no disturbance of culturally significant sites along the river foreshore.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== DESIGN OPTIONS =================== -->
+<section class="page" id="options">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 3 · Design Solution Options</div>
+    <h2 class="page-title">Three distinct approaches. One best fit.</h2>
+    <p class="lead">Each option addresses the same problem but takes a different technical approach. All were adapted from existing solutions used in remote and off-grid settings, with modifications to suit the Port Stewart context.</p>
+
+    <div class="opt-grid">
+      <div class="opt-card">
+        <div class="opt-num">01</div>
+        <h3>Borehole with Hand Pump &amp; Chlorine Dosing</h3>
+        <p>Drill a small borehole into local groundwater and equip it with an Afridev-style hand pump and in-line chlorine dosing. Bypasses heavy-metal contamination of surface water (Engineers Without Borders Australia, 2017).</p>
+        <p class="opt-pros"><strong>+ Strengths:</strong> Very low ongoing cost, proven design, high social acceptance.</p>
+        <p class="opt-cons"><strong>− Weaknesses:</strong> Groundwater in coastal Cape York may itself contain salts or heavy metals; requires specialist drilling contractors; chlorine introduces an unwanted chemical input.</p>
+      </div>
+
+      <div class="opt-card">
+        <div class="opt-num">02</div>
+        <h3>UV-Disinfection of River Water with Diesel Backup</h3>
+        <p>Pump water from the Stewart River through a pre-filter and UV-disinfection chamber, store in a roof-mounted tank, with a small diesel generator backup (Engineers Without Borders Australia, 2022).</p>
+        <p class="opt-pros"><strong>+ Strengths:</strong> High disinfection efficacy, no chemical residue, continuous river source.</p>
+        <p class="opt-cons"><strong>− Weaknesses:</strong> UV does not remove heavy metals — the main contaminant in Stewart River water; diesel backup requires fuel deliveries impractical in wet season; UV lamps require annual replacement.</p>
+      </div>
+
+      <div class="opt-card selected">
+        <div class="opt-num">03</div>
+        <h3>Rainwater Harvesting + Filtration + Solar Pump</h3>
+        <p>Capture rainwater from an existing rooftop, store in a 5,000-litre tank, treat through three-stage filtration, pressurise with a 12 V DC solar pump into a sealed header tank with a tap (Yaru Water, 2024).</p>
+        <p class="opt-pros"><strong>+ Strengths:</strong> Rainwater avoids heavy metals and salt; solar suits off-grid setting; all components available in Queensland; aligns with existing rooftop infrastructure.</p>
+        <p class="opt-cons"><strong>− Weaknesses:</strong> Relies on sufficient wet season; tank footprint must be agreed with YAC.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== DESIGN SELECTION =================== -->
+<section class="page" id="selection">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 4 · Design Selection</div>
+    <h2 class="page-title">A weighted decision matrix points to <em>Option 3</em>.</h2>
+    <p class="lead">Each option was rated 1 (poor fit) to 5 (excellent fit) for each criterion, multiplied by the criterion weight. Weights reflect community priorities: safety highest, followed by off-grid operability, maintainability, affordability, and cultural & environmental fit.</p>
+
+    <table>
+      <caption>Table 1. Weighted decision matrix for the three design options.</caption>
+      <thead>
+        <tr>
+          <th>Criterion</th>
+          <th class="num">Weight</th>
+          <th class="num">Opt. 1<br>Borehole</th>
+          <th class="num">Opt. 2<br>River + UV</th>
+          <th class="num">Opt. 3<br>Rainwater</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Drinking-water safety</td><td class="num">5</td><td class="num">3 (15)</td><td class="num">3 (15)</td><td class="num winner">5 (25)</td></tr>
+        <tr><td>Off-grid operability</td><td class="num">4</td><td class="num">5 (20)</td><td class="num">2 (8)</td><td class="num winner">5 (20)</td></tr>
+        <tr><td>Maintainability</td><td class="num">3</td><td class="num">4 (12)</td><td class="num">2 (6)</td><td class="num winner">4 (12)</td></tr>
+        <tr><td>Affordability</td><td class="num">3</td><td class="num">4 (12)</td><td class="num">2 (6)</td><td class="num winner">4 (12)</td></tr>
+        <tr><td>Cultural &amp; environmental fit</td><td class="num">2</td><td class="num">3 (6)</td><td class="num">2 (4)</td><td class="num winner">5 (10)</td></tr>
+        <tr class="total"><td>Total weighted score</td><td class="num">/85</td><td class="num">17</td><td class="num">39</td><td class="num">83</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub">Justification of Ratings</h2>
+    <p>Option 1 (borehole) scored well on operability and maintainability but received only a moderate safety rating because of unknown groundwater chemistry in coastal Cape York. Option 2 (river + UV) scored lowest because UV cannot remove the heavy metals identified by EWB in Stewart River water (Engineers Without Borders Australia, 2025), and the diesel backup undermines off-grid operability. Option 3 scored highest on safety (rainwater is the cleanest local source) and on cultural and environmental fit (zero emissions, no chemicals, no disturbance of riparian zones).</p>
+
+    <div class="callout">
+      <div class="label">Selected Solution</div>
+      <p><strong>Option 3 — Rainwater Harvesting with Multi-Stage Filtration and Solar Pump</strong> — was selected with a weighted score of 83 out of a possible 85. The selection is consistent with the approach that EWB and YAC have themselves pursued in the funded pilot project (Yaru Water, 2024), which provides strong external validation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== DETAILED DESIGN =================== -->
+<section class="page" id="design">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 5 · Detailed Design</div>
+    <h2 class="page-title">A five-stage system. Built simply.</h2>
+
+    <h2 class="sub">System Overview</h2>
+    <p>Aakurru Water is a five-stage system: (1) rainwater capture from an existing rooftop; (2) first-flush diverter and leaf screen; (3) bulk storage in a 5,000-litre poly tank; (4) a three-stage filter housing (sediment, activated carbon, ultrafiltration); (5) a 12-volt DC solar-powered pump feeding a sealed 1,000-litre header tank with a tap. The system delivers approximately 1,000 litres of treated drinking water per day to a community of up to 30 people.</p>
+
+    <!-- Functional block diagram in SVG -->
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Functional block diagram of the Aakurru Water system">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1E5C8C"/>
+          </marker>
+          <linearGradient id="sun" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFD66B"/>
+            <stop offset="100%" stop-color="#F39C12"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Sun (solar panel symbol) -->
+        <circle cx="800" cy="60" r="28" fill="url(#sun)"/>
+        <g stroke="#F39C12" stroke-width="2.5">
+          <line x1="800" y1="20" x2="800" y2="10"/>
+          <line x1="800" y1="100" x2="800" y2="110"/>
+          <line x1="760" y1="60" x2="750" y2="60"/>
+          <line x1="840" y1="60" x2="850" y2="60"/>
+          <line x1="772" y1="32" x2="765" y2="25"/>
+          <line x1="828" y1="32" x2="835" y2="25"/>
+          <line x1="772" y1="88" x2="765" y2="95"/>
+          <line x1="828" y1="88" x2="835" y2="95"/>
+        </g>
+
+        <!-- Rooftop -->
+        <polygon points="40,130 140,80 240,130" fill="#B0552A" stroke="#7D3514" stroke-width="2"/>
+        <rect x="60" y="130" width="160" height="70" fill="#F5EDE0" stroke="#7D3514" stroke-width="2"/>
+        <text x="140" y="220" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="13" font-weight="600" fill="#1A1A1A">Rooftop</text>
+        <text x="140" y="236" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" fill="#888">~100 m²</text>
+
+        <!-- Arrow 1 -->
+        <line x1="245" y1="170" x2="285" y2="170" stroke="#1E5C8C" stroke-width="2" marker-end="url(#arr)"/>
+
+        <!-- First-flush + leaf screen -->
+        <rect x="290" y="140" width="80" height="60" rx="4" fill="white" stroke="#1E5C8C" stroke-width="2"/>
+        <text x="330" y="167" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="600" fill="#1E5C8C">First-flush</text>
+        <text x="330" y="182" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="600" fill="#1E5C8C">+ leaf screen</text>
+
+        <!-- Arrow 2 -->
+        <line x1="375" y1="170" x2="415" y2="170" stroke="#1E5C8C" stroke-width="2" marker-end="url(#arr)"/>
+
+        <!-- Bulk tank 5000L -->
+        <rect x="420" y="110" width="100" height="120" rx="6" fill="#B8D4E3" stroke="#0F3554" stroke-width="2"/>
+        <text x="470" y="155" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="700" fill="#0F3554">5,000 L</text>
+        <text x="470" y="175" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" fill="#0F3554">Bulk tank</text>
+
+        <!-- Arrow 3 -->
+        <line x1="525" y1="170" x2="565" y2="170" stroke="#1E5C8C" stroke-width="2" marker-end="url(#arr)"/>
+
+        <!-- Filter (3 stages) -->
+        <g>
+          <rect x="570" y="130" width="22" height="80" rx="4" fill="#E8C9B5" stroke="#7D3514" stroke-width="1.5"/>
+          <rect x="595" y="130" width="22" height="80" rx="4" fill="#1A1A1A" stroke="#7D3514" stroke-width="1.5"/>
+          <rect x="620" y="130" width="22" height="80" rx="4" fill="#3E6B3A" stroke="#7D3514" stroke-width="1.5"/>
+          <text x="606" y="225" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="600" fill="#1A1A1A">3-stage filter</text>
+        </g>
+
+        <!-- Arrow 4 -->
+        <line x1="650" y1="170" x2="690" y2="170" stroke="#1E5C8C" stroke-width="2" marker-end="url(#arr)"/>
+
+        <!-- Pump (circle with arrows showing rotation) -->
+        <circle cx="715" cy="170" r="22" fill="white" stroke="#1E5C8C" stroke-width="2"/>
+        <text x="715" y="174" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="700" fill="#1E5C8C">DC</text>
+        <text x="715" y="210" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" fill="#1A1A1A">12V pump</text>
+
+        <!-- Solar wiring -->
+        <path d="M 800 90 Q 800 140 715 148" fill="none" stroke="#F39C12" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+        <!-- Arrow 5 -->
+        <line x1="740" y1="170" x2="780" y2="170" stroke="#1E5C8C" stroke-width="2" marker-end="url(#arr)"/>
+
+        <!-- Header tank -->
+        <rect x="785" y="135" width="70" height="90" rx="6" fill="#1E5C8C" stroke="#0F3554" stroke-width="2"/>
+        <text x="820" y="172" text-anchor="middle" font-family="Fraunces, serif" font-size="16" font-weight="700" fill="white">1,000 L</text>
+        <text x="820" y="190" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="10" fill="white">header</text>
+        <!-- Tap -->
+        <rect x="830" y="215" width="6" height="14" fill="#1A1A1A"/>
+        <circle cx="833" cy="232" r="3" fill="#1A1A1A"/>
+
+        <!-- Stage labels under the boxes -->
+        <text x="140" y="276" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="600" fill="#B0552A">① CAPTURE</text>
+        <text x="330" y="276" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="600" fill="#B0552A">② PRE-FILTER</text>
+        <text x="470" y="276" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="600" fill="#B0552A">③ BULK STORE</text>
+        <text x="606" y="276" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="600" fill="#B0552A">④ FILTER</text>
+        <text x="820" y="276" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="11" font-weight="600" fill="#B0552A">⑤ DELIVER</text>
+      </svg>
+      <div class="cap">Figure 1. Functional block diagram of the Aakurru Water system. Solar power feeds the DC pump (dashed line); water flows left-to-right (solid arrows).</div>
+    </div>
+
+    <h2 class="sub">Component Detail</h2>
+    <ul class="bullets">
+      <li><strong>Rainwater capture:</strong> existing rooftop area of approximately 100 m². In a typical wet-season rainfall of 1,400 mm, this surface can capture up to 140,000 litres — well in excess of annual community drinking-water demand.</li>
+      <li><strong>First-flush diverter and leaf screen:</strong> prevents leaves, bird droppings, and the first dirty rainfall from entering the bulk tank.</li>
+      <li><strong>Bulk tank:</strong> 5,000 L food-grade poly tank, opaque to inhibit algal growth, fitted with a sealed lid and a screened overflow.</li>
+      <li><strong>Three-stage filter:</strong> 5-micron sediment cartridge removes suspended solids; granular activated carbon removes taste, odour and any residual organics; 0.1 μm ultrafiltration cartridge removes bacteria and protozoa.</li>
+      <li><strong>Solar pump:</strong> 12 V DC diaphragm pump rated at 5–10 L/min, powered by a 200 W monocrystalline solar panel via a 100 Ah deep-cycle battery and charge controller. Battery provides 2–3 days of pumping autonomy through cloudy weather.</li>
+      <li><strong>Header tank:</strong> 1,000 L sealed tank with a low-mounted tap accessible to children and Elders. Dosed by the pump on demand via a float switch.</li>
+    </ul>
+
+    <h2 class="sub">Addressing Likely Community Concerns</h2>
+    <ul class="bullets">
+      <li><strong>"What if the wet season is short?"</strong> The 5,000 L bulk tank holds enough water for approximately five months of full daily use. A manual bypass allows lower-quality river water to be filtered as a contingency, though this would shorten cartridge life.</li>
+      <li><strong>"What if the pump breaks?"</strong> The system supports gravity-fed manual operation as a backup — opening a bypass valve lets water flow through the filter under gravity at a reduced rate.</li>
+      <li><strong>"Will this be controlled by outsiders?"</strong> No. The system is handed over to YAC at the end of installation, with all documentation, spare parts, and supplier contacts provided in the Rangers' office.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =================== PROTOTYPING =================== -->
+<section class="page" id="prototype">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 6 · Prototyping</div>
+    <h2 class="page-title">Testing the most uncertain part — at bench scale.</h2>
+
+    <h2 class="sub">What Was Prototyped and Why</h2>
+    <p>Because the full system cannot be assembled on-campus, the team prototyped the most uncertain subsystem: the three-stage filtration unit feeding a small reservoir under solar-pump pressure. The team needed to confirm that low-pressure DC pumping could drive water through three filter stages in series at acceptable flow, and that the assembled filter could meaningfully improve water quality in a single pass.</p>
+
+    <h2 class="sub">Construction &amp; Operation</h2>
+    <p>A bench-scale prototype was built using a 20 L food-grade plastic drum as a feed tank, three off-the-shelf clear filter housings connected in series with John Guest push-fit fittings, a 12 V DC diaphragm pump powered by a small benchtop solar panel and a 12 V sealed lead-acid battery, and a 5 L plastic jerry can as the output reservoir. The footprint of the rig was approximately 0.5 m × 1 m. The clear filter housings allow visible inspection of sediment accumulation in the first stage.</p>
+
+    <h2 class="sub">Testing and Results</h2>
+    <table>
+      <caption>Table 2. Bench-scale prototype test results.</caption>
+      <thead>
+        <tr><th>Test</th><th>Method</th><th>Result</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A. Flow rate</strong></td>
+          <td>Average of 3 measurements at output tap, clean cartridges</td>
+          <td class="num"><strong>4.2 L/min</strong> (range 4.0–4.4)</td>
+          <td class="winner">Exceeds 1.5 L/min design target</td>
+        </tr>
+        <tr>
+          <td><strong>B. Turbidity</strong></td>
+          <td>Feed water fouled with garden soil; visually rated cloudy</td>
+          <td class="num"><strong>~90% reduction</strong> (visually clear output)</td>
+          <td class="winner">Effective single-pass</td>
+        </tr>
+        <tr>
+          <td><strong>Pressure</strong></td>
+          <td>Peak downstream pressure; first housing rated to 300 kPa</td>
+          <td class="num">285 kPa peak</td>
+          <td>Modification: relief valve added</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub">Modifications Made</h2>
+    <p>After testing, two modifications were incorporated into the final design. First, a pressure-relief valve was added downstream of the pump after the test rig briefly exceeded the rated pressure of the first filter housing. Second, quick-release couplings were specified for the filter housings so that Rangers can replace cartridges without tools. Detailed test data are provided in the supporting documentation.</p>
+  </div>
+</section>
+
+<!-- =================== IMPLEMENTATION PLAN =================== -->
+<section class="page" id="implementation">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 7 · Implementation Plan</div>
+    <h2 class="page-title">Five steps. Community-led. End-to-end in one dry season.</h2>
+    <p class="lead">The implementation process places the Lama Lama community at the centre of the work, fits within a single dry-season visit, and leaves the system fully under community control at handover.</p>
+
+    <ol class="steps">
+      <li>
+        <h4>Site survey <span style="color:var(--ink-fade);font-weight:400;font-size:14px;">— 1 day</span></h4>
+        <p>The design team travels to Port Stewart with a YAC liaison. The team confirms the rooftop chosen for collection, the location of both tanks, the cable run for the solar panel, and any cultural protocols around the chosen site.</p>
+      </li>
+      <li>
+        <h4>Procurement and pre-assembly <span style="color:var(--ink-fade);font-weight:400;font-size:14px;">— 2 weeks (off-Country)</span></h4>
+        <p>All components are ordered from Cairns and Brisbane suppliers, freighted to Coen, and partially pre-assembled (filter housings, pump, electrical panel) to minimise on-site work.</p>
+      </li>
+      <li>
+        <h4>On-Country installation <span style="color:var(--ink-fade);font-weight:400;font-size:14px;">— 2–3 days</span></h4>
+        <p>The team works alongside Lama Lama Rangers to install gutters, the first-flush diverter, both tanks, the filter and pump, and the solar panel and battery. Rangers participate in every step so that they understand each connection.</p>
+      </li>
+      <li>
+        <h4>Training and handover <span style="color:var(--ink-fade);font-weight:400;font-size:14px;">— 1 day</span></h4>
+        <p>A practical training session is delivered for Rangers and any other interested community members. The session covers cartridge replacement, battery checks, tank cleaning, and basic troubleshooting. A bilingual one-page reference (English and Lama Lama, prepared with YAC) is left at the system and at the Rangers' office.</p>
+      </li>
+      <li>
+        <h4>Monitoring and remote support <span style="color:var(--ink-fade);font-weight:400;font-size:14px;">— 12 months</span></h4>
+        <p>Monthly check-in calls with YAC for the first year, plus an annual return visit to inspect the system and replace consumables. After 12 months, the system is fully community-managed with only on-call support.</p>
+      </li>
+    </ol>
+
+    <h2 class="sub">Evaluation, Ownership &amp; Repair</h2>
+    <p>The system will be evaluated against three indicators: <strong>(1)</strong> volume of treated water delivered per month, recorded by a simple in-line flow meter; <strong>(2)</strong> qualitative feedback from Rangers and Elders, collected during quarterly YAC community meetings; and <strong>(3)</strong> cost per litre of treated water, computed annually from cartridge replacement records. A successful first year is defined as at least 200,000 litres delivered, no reported safety concerns, and an operating cost below AUD $200.</p>
+
+    <p>By the end of the first year, system ownership rests fully with YAC. Rangers trained on the unit can install additional modules at other outstations in the Lama Lama estate, supporting the corporation's long-standing aim of restoring permanent occupation across Country (Centre for Appropriate Technology, 2010). If a component fails, the repair pathway is: Rangers consult the bilingual reference card; if needed, call the on-call support line; replacement parts are ordered from listed suppliers and freighted via the regular Coen mail run.</p>
+  </div>
+</section>
+
+<!-- =================== COST ANALYSIS =================== -->
+<section class="page" id="cost">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 8 · Cost Analysis</div>
+    <h2 class="page-title">Transparent costs. <em>AUD $3,750 per module.</em></h2>
+    <p class="lead">Capital costs below are for one complete system serving approximately 25–30 people. Prices in Australian dollars, estimated against listings at Bunnings, Total Tools, Solar Online Australia and Pump Warehouse during preparation of this report.</p>
+
+    <table>
+      <caption>Table 3. Bill of Materials and estimated capital cost.</caption>
+      <thead>
+        <tr><th>Item</th><th>Specification</th><th class="num">AUD</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Solar panel and battery</td><td>200 W monocrystalline panel; 100 Ah deep-cycle battery; charge controller</td><td class="num">$1,200</td></tr>
+        <tr><td>Solar-powered pump</td><td>12 V DC diaphragm pump, 5–10 L/min, with pressure switch</td><td class="num">$600</td></tr>
+        <tr><td>Filtration unit and cartridges</td><td>3-stage housing: 5 μm sediment + GAC + 0.1 μm UF cartridge</td><td class="num">$450</td></tr>
+        <tr><td>Storage tanks</td><td>1× 5,000 L bulk poly tank + 1× 1,000 L sealed header tank with tap</td><td class="num">$500</td></tr>
+        <tr><td>Piping, fittings and frame</td><td>PVC piping, valves, first-flush diverter, leaf screen, metal stand</td><td class="num">$300</td></tr>
+        <tr><td>Installation and training</td><td>2–3 days on-Country work and a 1-day training session</td><td class="num">$700</td></tr>
+        <tr class="total"><td><strong>TOTAL ESTIMATED CAPITAL COST</strong></td><td></td><td class="num"><strong>$3,750</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub">Operating &amp; End-of-Life Costs</h2>
+    <p>Annual operating costs are estimated at approximately <strong>AUD $150</strong>, comprising replacement filter cartridges (sediment and carbon cartridges every 6 months at ~$30 each, ultrafiltration cartridge every 18 months at ~$80) and minor consumables such as O-rings. The battery is the only component with a defined replacement schedule: a quality deep-cycle battery should last 7–10 years before replacement at approximately AUD $400.</p>
+
+    <p>At end-of-life, poly tanks can be recycled through Queensland tank recyclers (currently free at Cairns depots); the solar panel can be returned to the supplier under the Australian PV Stewardship scheme; the battery must be returned to a battery recycler. <strong>No hazardous chemicals to dispose of.</strong></p>
+
+    <h2 class="sub">Funding Pathways</h2>
+    <p>EWB Australia's existing partnership has already attracted philanthropic support from the Yaru Foundation (Yaru Water, 2024). Additional pathways that the community may consider include the Queensland Government's Remote Indigenous Capital Infrastructure Program, the federal Indigenous Advancement Strategy, and corporate matched-funding through Reconciliation Action Plan partners. Each module at AUD $3,750 falls within typical grant micro-funding limits — simplifying applications. The system does not generate income directly; its value is in <strong>avoided cost</strong> (bottled water from Coen) and <strong>improved community health</strong>.</p>
+  </div>
+</section>
+
+<!-- =================== OTHER CONSIDERATIONS + RECOMMENDATIONS =================== -->
+<section class="page" id="considerations">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 9 · Other Considerations &amp; Recommendations</div>
+    <h2 class="page-title">Beyond the technical — the broader picture.</h2>
+
+    <h2 class="sub">Other Considerations</h2>
+    <ul class="bullets">
+      <li><strong>Cultural appropriateness.</strong> The system is installed only after YAC has approved the chosen location. Signage is bilingual (English and Lama Lama), and the design avoids any disturbance of culturally significant sites along the Stewart River foreshore.</li>
+      <li><strong>Environmental sustainability.</strong> Zero local emissions, no chemical dosing, and the system removes the need for the truckload of bottled water otherwise brought from Coen. End-of-life recycling pathways are documented.</li>
+      <li><strong>Risk management.</strong> Three principal risks have been considered: (1) prolonged dry season — mitigated by the 5,000 L bulk tank and gravity-bypass option; (2) pump or battery failure — mitigated by on-site spare parts and manual gravity bypass; (3) wet-season inaccessibility — mitigated by the 12-month autonomous operation profile.</li>
+      <li><strong>Community journey.</strong> From the community's perspective, the journey moves from curiosity ("what is this strange box?"), through pride during installation (Rangers do the work), to routine ownership (cartridge changes are simply part of the monthly rhythm of caring for Country).</li>
+      <li><strong>Safety of vulnerable users.</strong> The tap on the header tank is mounted at a height accessible to children and Elders. The tank is sealed to prevent insect or animal contamination.</li>
+    </ul>
+
+    <h2 class="sub">Recommendations for Future Work</h2>
+    <ul class="bullets">
+      <li><strong>Independent water-quality testing.</strong> Microbial testing of treated water output should be commissioned annually for the first three years, ideally through a NATA-accredited laboratory in Cairns.</li>
+      <li><strong>Rainfall and demand monitoring.</strong> Twelve months of in-situ rainfall data and metered consumption data to confirm tank sizing and inform expansion plans.</li>
+      <li><strong>Community survey.</strong> A short, culturally appropriate survey administered by YAC at the 6-month mark to capture satisfaction and any unforeseen issues.</li>
+      <li><strong>Scaling study.</strong> If the first system performs well, design a multi-rooftop network for the wider Port Stewart settlement and outstations, with shared bulk storage where culturally appropriate.</li>
+      <li><strong>Open-source documentation.</strong> Make the final design package (Bill of Materials, drawings, training booklet) available to other Aboriginal Corporations under a Creative Commons licence, in consultation with YAC.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =================== ABOUT THE TEAM =================== -->
+<section class="page" id="about">
+  <div class="page-inner">
+    <div class="page-eyebrow">Section 10 · The Team</div>
+    <h2 class="page-title">Three students. One shared question.</h2>
+
+    <h2 class="sub">Group Declaration</h2>
+    <p>All listed team members confirm they contributed directly to this report. The table below summarises each member's contributions, which have been agreed by the whole team.</p>
+
+    <table>
+      <thead>
+        <tr><th>Member</th><th>Project Contributions</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hongtao Xu</strong><br><span style="color:var(--ink-fade);font-size:13px;">14697890</span></td>
+          <td>Background research; problem description and design criteria; prototype design and testing documentation; co-authored detailed design section; presentation slides 1–4.</td>
+        </tr>
+        <tr>
+          <td><strong>Trung Hieu Pham</strong><br><span style="color:var(--ink-fade);font-size:13px;">25111701</span></td>
+          <td>Design selection and decision matrix; implementation plan; cost analysis and Bill of Materials; other considerations; presentation slides 5–7.</td>
+        </tr>
+        <tr>
+          <td><strong>Liukuan Li</strong><br><span style="color:var(--ink-fade);font-size:13px;">14740512</span></td>
+          <td>Detailed design and system diagrams; key features and benefits write-up; recommendations; APA referencing; presentation slides 8–12; website layout and visual design.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="sub">Acknowledgement of Country</h2>
+    <div class="callout">
+      <p>We respectfully acknowledge the <strong>Lama Lama people</strong> as the Traditional Owners of the lands and waters of Port Stewart and Princess Charlotte Bay, where this design is intended to be implemented. We acknowledge their continuing connection to land, sea, and culture, and pay our respects to their Elders past, present, and emerging. We also acknowledge the <strong>Gadigal people of the Eora Nation</strong>, on whose unceded lands the University of Technology Sydney stands and on which this project was developed.</p>
+      <p style="margin-top:14px;">This design proposal has been prepared in the spirit of listening and learning. We acknowledge that the Lama Lama people, through the Yintjingga Aboriginal Corporation and the Lama Lama Land Trust, are the experts on their own Country, and that any successful solution must be community-led.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== REFERENCES =================== -->
+<section class="page" id="references">
+  <div class="page-inner">
+    <div class="page-eyebrow">References &amp; Appendices</div>
+    <h2 class="page-title">References.</h2>
+
+    <div class="references">
+      <p>Australian Institute of Aboriginal and Torres Strait Islander Studies. (2023). <em>Lama Lama people</em>. https://aiatsis.gov.au/</p>
+      <p>Centre for Appropriate Technology. (2010). <em>Community planning with the Lama Lama people</em>. https://www.cfat.org.au/community-planning-with-the-lama-lama-people</p>
+      <p>Engineers Without Borders Australia. (2017, June 6). <em>Launch of Lafaek Water Social Enterprise Project, Timor-Leste</em>. https://ewb.org.au/</p>
+      <p>Engineers Without Borders Australia. (2022, April 5). <em>Solar is powering a water supply for an island on the Mekong</em>. https://ewb.org.au/</p>
+      <p>Engineers Without Borders Australia. (2024). <em>EWB Challenge 2024: Port Stewart, Lama Lama community</em>. https://ewbchallenge.org/</p>
+      <p>Engineers Without Borders Australia. (2025, May 14). <em>The power of partnerships: unlocking access to clean water on Lama Lama Country</em>. https://ewb.org.au/blog/2025/05/14/the-power-of-partnerships-unlocking-access-to-clean-water-on-lama-lama-country/</p>
+      <p>International Renewable Energy Agency. (2021). <em>Solar water pumping for rural areas</em>. https://www.irena.org/</p>
+      <p>Kaestli, M., O'Donnell, M., Rose, A., Webb, J. R., Mayo, M., Currie, B. J., &amp; Gibb, K. (2019). Opportunistic pathogens and large microbial diversity detected in source-to-distribution drinking water of three remote communities in Northern Australia. <em>PLoS Neglected Tropical Diseases, 13</em>(9), e0007672. https://doi.org/10.1371/journal.pntd.0007672</p>
+      <p>Lama Lama Aboriginal Corporation. (n.d.). <em>About us</em>. https://www.lamalama.org.au/about-us/</p>
+      <p>Office of the Registrar of Indigenous Corporations. (2016). <em>Taking care of country</em>. https://www.oric.gov.au/corporations-and-registers/corporation-stories/taking-care-country</p>
+      <p>Queensland Government. (2023). <em>Lama Lama National Park</em>. https://parks.des.qld.gov.au/parks/lama-lama</p>
+      <p>United Nations. (2023). <em>Sustainable Development Goal 6: Clean water and sanitation</em>. https://sdgs.un.org/goals/goal6</p>
+      <p>World Health Organization. (2022). <em>Drinking-water</em>. https://www.who.int/news-room/fact-sheets/detail/drinking-water</p>
+      <p>Yaru Water. (2024, October 10). <em>Supporting safe drinking water for the Lama Lama community</em>. https://yaruwater.com/blogs/news/supporting-safe-drinking-water-for-the-lama-lama-community</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <h4>Aakurru Water</h4>
+        <p>A drinking-water proposal prepared by students of 31265 Communication for IT Professionals at the University of Technology Sydney, in response to the EWB Challenge 2024 design brief for Port Stewart, Lama Lama Country.</p>
+        <p style="margin-top:14px;font-style:italic;color:var(--earth-light);">Simple. Solar. Sustainable.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#background">Background</a></li>
+          <li><a href="#problem">The Problem</a></li>
+          <li><a href="#design">The Design</a></li>
+          <li><a href="#cost">Costings</a></li>
+          <li><a href="#references">References</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Partners</h4>
+        <ul>
+          <li><a href="https://www.lamalama.org.au/" target="_blank" rel="noopener">Yintjingga Aboriginal Corp.</a></li>
+          <li><a href="https://ewb.org.au/" target="_blank" rel="noopener">Engineers Without Borders</a></li>
+          <li><a href="https://www.uts.edu.au/" target="_blank" rel="noopener">UTS</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2024 Aakurru Water Team · Prepared for 31265 CITP Assessment 3 · This land was never ceded.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Active section highlight in nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  function updateActive() {
+    let current = '';
+    const scrollY = window.scrollY + 120;
+    sections.forEach(sec => {
+      if (sec.offsetTop <= scrollY) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', updateActive);
+  updateActive();
+</script>
+
+</body>
+</html>
